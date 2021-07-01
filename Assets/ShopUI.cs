@@ -9,7 +9,9 @@ public class ShopUI : MonoBehaviour
     {
         foreach (var item in ShopItemData.instance.shopItems)
         {
-
+            var newItem =
+                Instantiate(itemBase, itemBase.transform.parent);
+            newItem.Init(item);
         }
     }
 }
