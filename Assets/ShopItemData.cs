@@ -21,6 +21,11 @@ public class ShopItemInfo
 }
 public class ShopItemData : MonoBehaviour
 {
+    public static ShopItemData instance;
     public List<ShopItemInfo> shopItems;
+    private void Awake()
+    {
+        instance = this;
+    }
 }
 
