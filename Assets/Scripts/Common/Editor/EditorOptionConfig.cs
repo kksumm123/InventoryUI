@@ -28,7 +28,21 @@ public class EditorOptionConfig : EditorWindow
                 UserData.SetGold(gold);
             }
         }
-        GUILayout.EndHorizontal(); ;
+        GUILayout.EndHorizontal();
+
+        GUILayout.BeginHorizontal();
+        {
+            if (GUILayout.Button("PlayerPrefs Delete All"))
+            {
+                if (EditorUtility.DisplayDialog(
+                    "경고", "정말 다 지울거야?", "어"))
+                {
+                    PlayerPrefs.DeleteAll();
+                }
+            }
+        }
+        GUILayout.EndHorizontal();
+
         if (GUILayout.Button("테스트 버튼"))
         {
             Debug.Log("테스트 버튼 누름");
