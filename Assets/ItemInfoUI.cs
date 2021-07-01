@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ItemInfoUI : MonoBehaviour
 {
     public static ItemInfoUI instance;
+    public ShopItemInfo shopItemInfo;
     private void Awake()
     {
         instance = this;
@@ -36,6 +37,13 @@ public class ItemInfoUI : MonoBehaviour
     void ItemBuy()
     {
         print("ItemBuy");
+
+        UserData.instance.gold -= shopItemInfo.buyPrice;
+        var newItem = new InvenItemInfo();
+        newItem.itemID = shopItemInfo.itemID;
+        newItem.count = 1;
+        newItem.getDate = DateTime.Now.ToString();
+        UserData.instance.invenItems.Add(newItem);
     }
     void ItemSell()
     {
@@ -45,6 +53,8 @@ public class ItemInfoUI : MonoBehaviour
 
     public void ShowShopItem(ShopItemInfo shopItemInfo)
     {
+        shopBtn.SetActive(true);
+        this.shopItemInfo = shopItemInfo;
         itemName.text = shopItemInfo.name;
         icon.sprite = shopItemInfo.icon;
         description.text = shopItemInfo.description;
