@@ -21,8 +21,16 @@ public class UserData : MonoBehaviour
     }
     private void Load()
     {
-        gold = PlayerPrefs.GetInt("gold");
-        dia = PlayerPrefs.GetInt("dia");
+        if (PlayerPrefs.HasKey("gold"))
+        {
+            gold = PlayerPrefs.GetInt("gold");
+            dia = PlayerPrefs.GetInt("dia");
+        }
+        else
+        {
+            gold = 1100;
+            dia = 120;
+        }
     }
     private void Save()
     {
