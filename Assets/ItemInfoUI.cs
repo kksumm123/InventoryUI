@@ -1,21 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemInfoUI : MonoBehaviour
 {
-    Text name;
-    Image itemInfoUI;
+    public static ItemInfoUI instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    Text itemName;
     Image icon;
     Text description;
     Button button;
     private void Start()
     {
-        name = transform.Find("ItemInfoUI/Name").GetComponent<Text>();
-        itemInfoUI = transform.Find("ItemInfoUI").GetComponent<Image>();
-        icon = transform.Find("ItemInfoUI/Icon").GetComponent<Image>();
-        description = transform.Find("ItemInfoUI/Description").GetComponent<Text>();
-        button = transform.Find("ItemInfoUI/Button").GetComponent<Button>();
+        itemName = transform.Find("Name").GetComponent<Text>();
+        icon = transform.Find("Icon").GetComponent<Image>();
+        description = transform.Find("Description").GetComponent<Text>();
+        button = transform.Find("Button").GetComponent<Button>();
+    }
+
+    public void ShowShopItem(ShopItemInfo shopItemInfo)
+    {
+        itemName.text = shopItemInfo.name;
+        icon.sprite = shopItemInfo.icon;
+        description.text = shopItemInfo.description;
     }
 }
