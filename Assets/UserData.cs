@@ -52,6 +52,18 @@ public class UserData : MonoBehaviour
             dia = 120;
         }
     }
+
+    public static void SetGold(int gold)
+    {
+        PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.Save();
+        if(instance)
+        {
+            instance.gold = gold;
+            MoneyUI.instance.RefreshUI();
+        }
+    }
+
     private void Save()
     {
         PlayerPrefs.SetInt("invenItems.Count", invenItems.Count);
