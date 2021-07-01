@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.UI;
 
 public class InvenItem : MonoBehaviour
 {
@@ -16,5 +16,18 @@ public class InvenItem : MonoBehaviour
     void Update()
     {
         
+    }
+
+    internal void Init(InvenItemInfo item)
+    {
+        //item.itemID
+        //item.count
+        ShopItemInfo shopItemInfo = 
+            ShopItemData.instance.shopItems
+            .Find(x => x.itemID == item.itemID);
+        GetComponent<Image>().sprite = shopItemInfo.icon;
+        transform.Find("CountText").GetComponent<Text>().text = item.count.ToString();
+
+
     }
 }

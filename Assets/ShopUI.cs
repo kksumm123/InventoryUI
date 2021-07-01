@@ -7,6 +7,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] ShopItem itemBase;
     void Start()
     {
+        itemBase.gameObject.SetActive(true);
         foreach (var item in ShopItemData.instance.shopItems)
         {
             var newItem =

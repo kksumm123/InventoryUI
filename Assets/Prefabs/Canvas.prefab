@@ -251,6 +251,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060212833ac38444191d43196e827498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopItemInfo:
+    name: 
+    itemID: 0
+    icon: {fileID: 0}
+    type: 0
+    sellPrice: 0
+    buyPrice: 0
+    description: 
 --- !u!1 &1539869597
 GameObject:
   m_ObjectHideFlags: 0
@@ -1911,6 +1919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de8892f885ec0746b206ad3461482c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemBase: {fileID: 1700393700366200154}
 --- !u!1 &7759571614725597810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1923,7 +1932,7 @@ GameObject:
   - component: {fileID: 1663961823948555036}
   - component: {fileID: 512505161643694439}
   m_Layer: 5
-  m_Name: PriceText
+  m_Name: CountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
