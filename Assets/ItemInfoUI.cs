@@ -44,7 +44,8 @@ public class ItemInfoUI : MonoBehaviour
         newItem.count = 1;
         newItem.getDate = DateTime.Now.ToString();
         UserData.instance.invenItems.Add(newItem);
-        InvenUI.instance.RefreshUI(); 
+        InvenUI.instance.RefreshUI();
+        MoneyUI.instance.RefreshUI();
     }
     void ItemSell()
     {
