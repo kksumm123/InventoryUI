@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShopUI : MonoBehaviour
 {
+    [SerializeField] ShopItemUI itemBase;
     void Start()
     {
         foreach (var item in ShopItemData.instance.shopItems)
