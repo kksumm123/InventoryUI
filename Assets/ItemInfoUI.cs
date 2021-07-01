@@ -38,7 +38,7 @@ public class ItemInfoUI : MonoBehaviour
     {
         print("ItemBuy");
 
-        UserData.instance.gold -= shopItemInfo.buyPrice;
+        UserData.instance.Gold -= shopItemInfo.buyPrice;
         var newItem = new InvenItemInfo();
         newItem.itemID = shopItemInfo.itemID;
         newItem.count = 1;

@@ -22,7 +22,7 @@ public class MoneyUI : MonoBehaviour
 
     public void RefreshUI()
     {
-        goldText.text = UserData.instance.gold.ToString();
+        goldText.text = UserData.instance.Gold.ToString();
         diaText.text = UserData.instance.dia.ToString();
     }
 }

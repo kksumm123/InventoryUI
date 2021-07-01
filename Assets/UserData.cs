@@ -17,7 +17,12 @@ public class UserData : MonoBehaviour
 
     public List<InvenItemInfo> invenItems;
 
-    public int gold;
+    int gold;
+    public int Gold
+    {
+        get { return gold; }
+        set { gold = value; }
+    }
     public int dia;
     private void Awake()
     {
@@ -33,7 +38,7 @@ public class UserData : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("gold"))
         {
-            gold = PlayerPrefs.GetInt("gold");
+            Gold = PlayerPrefs.GetInt("gold");
             dia = PlayerPrefs.GetInt("dia");
 
             int itemCount = PlayerPrefs.GetInt("invenItems.Count", invenItems.Count);
@@ -48,7 +53,7 @@ public class UserData : MonoBehaviour
         }
         else
         {
-            gold = 1100;
+            Gold = 1100;
             dia = 120;
         }
     }
@@ -59,7 +64,7 @@ public class UserData : MonoBehaviour
         PlayerPrefs.Save();
         if(instance)
         {
-            instance.gold = gold;
+            instance.Gold = gold;
             MoneyUI.instance.RefreshUI();
         }
     }
@@ -74,7 +79,7 @@ public class UserData : MonoBehaviour
             PlayerPrefs.SetInt("invenItems.count" + i, saveItem.count);
             PlayerPrefs.SetString("invenItems.getDate" + i, saveItem.getDate);
         }
-        PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.SetInt("gold", Gold);
         PlayerPrefs.SetInt("dia", dia);
     }
 }
