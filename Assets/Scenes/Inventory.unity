@@ -429,10 +429,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 368282156, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
-      propertyPath: itemBase
-      value: 
-      objectReference: {fileID: 8620128051787707931}
     - target: {fileID: 8620128051034144227, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -440,6 +436,14 @@ PrefabInstance:
     - target: {fileID: 8620128051034144227, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620128051096291693, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
+      propertyPath: m_Text
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620128051096291695, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
+      propertyPath: m_Name
+      value: PriceText
       objectReference: {fileID: 0}
     - target: {fileID: 8620128051875202478, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -452,6 +456,10 @@ PrefabInstance:
     - target: {fileID: 8620128051875202478, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8620128052017156280, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
+      propertyPath: m_Name
+      value: ShopItem
       objectReference: {fileID: 0}
     - target: {fileID: 8620128052017156281, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -477,6 +485,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8620128052017156286, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d9ba4e7d0964044ea54abe409d81dfd, type: 3}
     - target: {fileID: 8620128052764878109, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -571,14 +583,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
---- !u!114 &8620128051787707931 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4542397596685263061, guid: 52a06e7a0fc469944b840706895b342e, type: 3}
-  m_PrefabInstance: {fileID: 8620128051787707930}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f01c5f033e7751c4c85249287b282087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

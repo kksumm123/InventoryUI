@@ -12,12 +12,12 @@ public enum ItemType
 [System.Serializable]
 public class ShopItemInfo
 {
-    [SerializeField] string name;
-    [SerializeField] Sprite icon;
-    [SerializeField] ItemType type; 
-    [SerializeField] int sellPrice;
-    [SerializeField] int butPrice;
-    [SerializeField] string description;
+    public string name;
+    public Sprite icon;
+    public ItemType type; 
+    public int sellPrice;
+    public int buyPrice;
+    public string description;
 }
 public class ShopItemData : MonoBehaviour
 {

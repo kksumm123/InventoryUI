@@ -13,5 +13,6 @@ public class ShopUI : MonoBehaviour
                 Instantiate(itemBase, itemBase.transform.parent);
             newItem.Init(item);
         }
+        itemBase.gameObject.SetActive(false);
     }
 }
