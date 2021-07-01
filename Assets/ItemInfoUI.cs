@@ -16,13 +16,32 @@ public class ItemInfoUI : MonoBehaviour
     Image icon;
     Text description;
     Button button;
+    GameObject shopBtn;
+    GameObject invenBtn;
     private void Start()
     {
         itemName = transform.Find("Name").GetComponent<Text>();
         icon = transform.Find("Icon").GetComponent<Image>();
         description = transform.Find("Description").GetComponent<Text>();
-        button = transform.Find("Button").GetComponent<Button>();
+        shopBtn = transform.Find("ShopBtn").gameObject;
+        invenBtn = transform.Find("InvenBtn").gameObject;
+        shopBtn.SetActive(false);
+        invenBtn.SetActive(false);
+        shopBtn.transform.Find("Button").GetComponent<Button>()
+            .AddListener(this, ItemBuy);
+        invenBtn.transform.Find("Button").GetComponent<Button>()
+            .AddListener(this, ItemSell);
     }
+
+    void ItemBuy()
+    {
+        print("ItemBuy");
+    }
+    void ItemSell()
+    {
+        print("ItemSell");
+    }
+
 
     public void ShowShopItem(ShopItemInfo shopItemInfo)
     {
