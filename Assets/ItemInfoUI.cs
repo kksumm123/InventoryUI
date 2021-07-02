@@ -8,6 +8,7 @@ public class ItemInfoUI : MonoBehaviour
 {
     public static ItemInfoUI instance;
     public ShopItemInfo shopItemInfo;
+    public InvenItemInfo invenItemInfo;
     private void Awake()
     {
         instance = this;
@@ -19,7 +20,6 @@ public class ItemInfoUI : MonoBehaviour
 
 
     Text description;
-    Button button;
     GameObject shopBtn;
     GameObject invenBtn;
     private void Start()
@@ -56,6 +56,8 @@ public class ItemInfoUI : MonoBehaviour
 
         UserData.instance.Gold += shopItemInfo.sellPrice;
         //UserData.instance.invenItems.Remove();
+        UserData.instance.invenItems.Remove(invenItemInfo);
+        InvenUI.instance.RefreshUI();
     }
 
 
@@ -66,13 +68,14 @@ public class ItemInfoUI : MonoBehaviour
 
         SetItemInfo(shopItemInfo);
     }
-    internal void ShowInvenItem(InvenItemInfo inveniteminfo)
+    internal void ShowInvenItem(InvenItemInfo invenItemInfo)
     {
+        this.invenItemInfo = invenItemInfo;
         invenBtn.SetActive(true);
         shopBtn.SetActive(false);
 
         var shopItemInfo = ShopItemData.instance.shopItems
-            .Find(x => x.itemID == inveniteminfo.itemID);
+            .Find(x => x.itemID == invenItemInfo.itemID);
         SetItemInfo(shopItemInfo);
     }
 
