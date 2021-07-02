@@ -8,6 +8,6 @@ public class SkillSlotItem : MonoBehaviour, IDropHandler
 {
     public void OnDrop(PointerEventData data)
     {
-        transform.Find("Image").GetComponent<Image>().sprite = data.pointerClick.GetComponent<Image>().sprite;
+        transform.Find("Icon").GetComponent<Image>().sprite = data.pointerClick.GetComponent<Image>().sprite;
     }
 }
