@@ -9,6 +9,11 @@ public class InvenItemInfo
     public int itemID;
     public int count;
     public string getDate; //획득한 날짜
+
+    public ShopItemInfo GetShopItemInfo()
+    {
+        return ShopItemData.instance.shopItems.Find(x => x.itemID == itemID);
+    }
 }
 
 public class UserData : MonoBehaviour

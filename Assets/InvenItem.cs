@@ -7,22 +7,31 @@ using UnityEngine.UI;
 
 public class InvenItem : MonoBehaviour, IPointerClickHandler
 {
-    InvenItemInfo inveniteminfo;
+    InvenItemInfo invenItemInfo;
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
-            ItemInfoUI.instance.ShowInvenItem(inveniteminfo);
+            ItemInfoUI.instance.ShowInvenItem(invenItemInfo);
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            // invenItemInfo 아이템을 장착하자 -> 장착정보
+
+            // 긴 코드
+            //ShopItemInfo shopItemInfo = 
+            //    ShopItemData.instance.shopItems
+            //    .Find(x => x.itemID == invenItemInfo.itemID);
+
+            ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
+        }
     }
 
     internal void Init(InvenItemInfo item)
     {
-        inveniteminfo = item;
+        invenItemInfo = item;
 
         //item.itemID
         //item.count
-        ShopItemInfo shopItemInfo =
-            ShopItemData.instance.shopItems
-            .Find(x => x.itemID == item.itemID);
+        ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
         GetComponent<Image>().sprite = shopItemInfo.icon;
         transform.Find("CountText").GetComponent<Text>().text = item.count.ToString();
 

@@ -75,8 +75,7 @@ public class ItemInfoUI : MonoBehaviour
         invenBtn.SetActive(true);
         shopBtn.SetActive(false);
 
-        var shopItemInfo = ShopItemData.instance.shopItems
-            .Find(x => x.itemID == invenItemInfo.itemID);
+        var shopItemInfo = invenItemInfo.GetShopItemInfo();
         SetItemInfo(shopItemInfo);
     }
 
