@@ -7,16 +7,16 @@ using UnityEngine.UI;
 public class MoneyUI : MonoBehaviour
 {
     public static MoneyUI instance;
+    Text goldText;
+    Text diaText;
     private void Awake()
     {
         instance = this;
-    }
-    Text goldText;
-    Text diaText;
-    void Start()
-    {
         goldText = transform.Find("Gold/Text").GetComponent<Text>();
         diaText = transform.Find("Dia/Text").GetComponent<Text>();
+    }
+    void Start()
+    {
         RefreshUI();
     }
 

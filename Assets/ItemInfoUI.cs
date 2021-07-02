@@ -15,6 +15,9 @@ public class ItemInfoUI : MonoBehaviour
 
     Text itemName;
     Image icon;
+
+
+
     Text description;
     Button button;
     GameObject shopBtn;
@@ -50,15 +53,36 @@ public class ItemInfoUI : MonoBehaviour
     void ItemSell()
     {
         print("ItemSell");
+
+        UserData.instance.Gold += shopItemInfo.sellPrice;
+        //UserData.instance.invenItems.Remove();
     }
 
 
     public void ShowShopItem(ShopItemInfo shopItemInfo)
     {
         shopBtn.SetActive(true);
+        invenBtn.SetActive(false);
+
+        SetItemInfo(shopItemInfo);
+    }
+    internal void ShowInvenItem(InvenItemInfo inveniteminfo)
+    {
+        invenBtn.SetActive(true);
+        shopBtn.SetActive(false);
+
+        var shopItemInfo = ShopItemData.instance.shopItems
+            .Find(x => x.itemID == inveniteminfo.itemID);
+        SetItemInfo(shopItemInfo);
+    }
+
+
+    private void SetItemInfo(ShopItemInfo shopItemInfo)
+    {
         this.shopItemInfo = shopItemInfo;
         itemName.text = shopItemInfo.name;
         icon.sprite = shopItemInfo.icon;
         description.text = shopItemInfo.description;
     }
+
 }
