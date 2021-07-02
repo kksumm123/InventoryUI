@@ -58,6 +58,7 @@ public class ItemInfoUI : MonoBehaviour
         //UserData.instance.invenItems.Remove();
         UserData.instance.invenItems.Remove(invenItemInfo);
         InvenUI.instance.RefreshUI();
+        MoneyUI.instance.RefreshUI();
     }
 
 
