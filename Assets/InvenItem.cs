@@ -10,7 +10,8 @@ public class InvenItem : MonoBehaviour, IPointerClickHandler
     InvenItemInfo inveniteminfo;
     public void OnPointerClick(PointerEventData eventData)
     {
-        ItemInfoUI.instance.ShowInvenItem(inveniteminfo);
+        if (eventData.button == PointerEventData.InputButton.Left)
+            ItemInfoUI.instance.ShowInvenItem(inveniteminfo);
     }
 
     internal void Init(InvenItemInfo item)
