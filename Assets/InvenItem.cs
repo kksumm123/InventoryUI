@@ -21,7 +21,9 @@ public class InvenItem : MonoBehaviour, IPointerClickHandler
             //    ShopItemData.instance.shopItems
             //    .Find(x => x.itemID == invenItemInfo.itemID);
 
-            ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
+            // 짧은 코드
+            //ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
+            EquipUI.instance.SetEquipItem(invenItemInfo);
         }
     }
 
