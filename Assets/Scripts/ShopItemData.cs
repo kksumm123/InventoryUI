@@ -100,8 +100,13 @@ public class ShopItemData : MonoBehaviour
     void SaveToGoogleSheetAll()
     {
         UnityGoogleSheet.Load<MyGame.Data>();
+        int count = 0;
         foreach (var item in shopItems)
         {
+#if UNITY_EDITOR
+            float percent = ((float)count++ / shopItems.Count);
+            UnityEditor.EditorUtility.DisplayProgressBar("구글 에서 데이터 가져오는 중", (percent * 100).ToString() + "%", percent);
+#endif
             MyGame.Data data = MyGame.Data.DataMap[item.itemID];
             data.itemID = item.itemID;
             data.name = item.name;
