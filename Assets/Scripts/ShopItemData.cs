@@ -71,7 +71,7 @@ public class ShopItemData : MonoBehaviour
             shopItems.Add(new ShopItemInfo(item));
         }
     }
-    [ContextMenu("Save To Google Sheet", false, -10000)]
+    [ContextMenu("Save To Google Sheet On FirstItem", false, -10000)]
     void SaveToGoogleSheet()
     {
         UnityGoogleSheet.Load<MyGame.Data>();
@@ -80,6 +80,23 @@ public class ShopItemData : MonoBehaviour
         mapItem.description = firstItem.description;
         //write
         UnityGoogleSheet.Write(mapItem);
+    }
+    [ContextMenu("Save To Google Sheet All", false, -10000)]
+    void SaveToGoogleSheetAll()
+    {
+        UnityGoogleSheet.Load<MyGame.Data>();
+        foreach (var item in shopItems)
+        {
+            MyGame.Data data = MyGame.Data.DataMap[item.itemID];
+            data.itemID = item.itemID;
+            data.name = item.name;
+            data.iconName = item.iconName;
+            data.type = item.type;
+            data.sellPrice = item.sellPrice;
+            data.buyPrice = item.buyPrice;
+            data.description = item.description;
+            UnityGoogleSheet.Write(data);
+        }
     }
 }
 
