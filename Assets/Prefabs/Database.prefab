@@ -52,6 +52,13 @@ MonoBehaviour:
     buyPrice: 200
     description: "\uB0B4 \uBAB8\uC740 \uAC80\uC73C\uB85C \uB418\uC5B4\uC788\uB2E4(\uC5D0\uB514\uD130\uC5D0\uC11C
       \uC218\uC815)"
+  - itemID: 2
+    name: "\uD65C"
+    iconName: b_t_01
+    type: 0
+    sellPrice: 100
+    buyPrice: 200
+    description: "\uC288\uC288\uC289"
   - itemID: 3
     name: "\uBC29\uD328"
     iconName: shoulders
@@ -60,3 +67,17 @@ MonoBehaviour:
     buyPrice: 200
     description: "\uB2E4 \uB9C9\uC544\uB0B8\uB2E4(\uC5D0\uB514\uD130\uC5D0\uC11C
       \uC218\uC815)"
+  - itemID: 4
+    name: "\uBCA8\uD2B8"
+    iconName: belts
+    type: 1
+    sellPrice: 100
+    buyPrice: 200
+    description: "\uBC43\uC0B4\uC870\uC774\uAE30"
+  - itemID: 5
+    name: "\uD3EC\uC158"
+    iconName: hp
+    type: 2
+    sellPrice: 100
+    buyPrice: 200
+    description: "HP 10 \uD68C\uBCF5"

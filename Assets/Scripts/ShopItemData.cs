@@ -29,13 +29,13 @@ public enum MoneyType
 public class ShopItemInfo
 {
     public int itemID;
-    public string   name;
+    public string name;
     //public Sprite   icon;
     public string iconName;
     public ItemType type;
-    public int      sellPrice;
-    public int      buyPrice;
-    public string   description;
+    public int sellPrice;
+    public int buyPrice;
+    public string description;
 
     public ShopItemInfo(MyGame.Data item)
     {
@@ -60,16 +60,31 @@ public class ShopItemData : MonoBehaviour
     {
         instance = this;
     }
-    [ContextMenu("Load Name2", false, -10000)]
-    void Load()
+    // Load 함수들에서 쓰이는 데이터를 불러와 상점의 아이템리스트에 값을 넣어주는 메소드
+    private void InitFromGoogleData()
     {
-        //UnityGoogleSheet.Load<MyGame.Data>();
-        MyGame.Data.Load();
         shopItems.Clear();
         foreach (var item in MyGame.Data.DataList)
         {
             shopItems.Add(new ShopItemInfo(item));
         }
+    }
+    [ContextMenu("Load ItemInfoData at Unity Json", false, -10000)]
+    void Load()
+    {
+        //UnityGoogleSheet.Load<MyGame.Data>();
+        MyGame.Data.Load();
+        InitFromGoogleData();
+    }
+    [ContextMenu("Load ItemInfoData at Google Sheet", false, -10000)]
+    void SheetLoad()
+    {
+        MyGame.Data.LoadFromGoogle((list, map) => {
+            foreach (var data in MyGame.Data.DataList)
+            {
+                InitFromGoogleData();
+            }
+        }, true);
     }
     [ContextMenu("Save To Google Sheet On FirstItem", false, -10000)]
     void SaveToGoogleSheet()
