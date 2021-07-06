@@ -23,6 +23,6 @@ public class EquipItem : MonoBehaviour
         ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
 
         Image image = transform.Find("Icon").GetComponent<Image>();
-        image.sprite = shopItemInfo.icon;
+        image.sprite = shopItemInfo.Icon;
     }
 }

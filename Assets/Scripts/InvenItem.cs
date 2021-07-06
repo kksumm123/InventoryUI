@@ -34,7 +34,7 @@ public class InvenItem : MonoBehaviour, IPointerClickHandler
         //item.itemID
         //item.count
         ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
-        GetComponent<Image>().sprite = shopItemInfo.icon;
+        GetComponent<Image>().sprite = shopItemInfo.Icon;
         transform.Find("CountText").GetComponent<Text>().text = item.count.ToString();
 
 

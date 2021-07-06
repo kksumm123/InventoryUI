@@ -84,7 +84,7 @@ public class ItemInfoUI : MonoBehaviour
     {
         this.shopItemInfo = shopItemInfo;
         itemName.text = shopItemInfo.name;
-        icon.sprite = shopItemInfo.icon;
+        icon.sprite = shopItemInfo.Icon;
         description.text = shopItemInfo.description;
     }
 

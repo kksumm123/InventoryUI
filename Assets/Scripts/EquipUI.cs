@@ -24,7 +24,7 @@ public class EquipUI : MonoBehaviour
             case ItemType.Armor:
                 armorEquipItem.SetItem(invenItemInfo);
                 break;
-            case ItemType.potion:
+            case ItemType.Potion:
                 potionEquipItem.SetItem(invenItemInfo);
                 break;
             case ItemType.Etc:

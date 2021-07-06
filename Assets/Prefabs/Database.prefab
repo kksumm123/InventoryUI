@@ -44,24 +44,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopItems:
-  - name: "\uB3C4\uB07C"
-    itemID: 0
-    icon: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
+  - itemID: 1
+    name: "\uCE7C"
+    iconName: sword
     type: 0
-    sellPrice: 999
-    buyPrice: 20
-    description: "\uC9F1\uC9F1\uB3C4\uB07C"
-  - name: "\uCF54\uC778"
-    itemID: 1
-    icon: {fileID: 21300000, guid: 3676a0b185daeb54fb257f700ba7ead4, type: 3}
-    type: 3
-    sellPrice: 10
-    buyPrice: 10
-    description: "\uCF54\uC778"
-  - name: "\uC2E0\uBC1C"
-    itemID: 2
-    icon: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
+    sellPrice: 100
+    buyPrice: 200
+    description: "\uB0B4 \uBAB8\uC740 \uAC80\uC73C\uB85C \uB418\uC5B4\uC788\uB2E4(\uC5D0\uB514\uD130\uC5D0\uC11C
+      \uC218\uC815)"
+  - itemID: 3
+    name: "\uBC29\uD328"
+    iconName: shoulders
     type: 1
-    sellPrice: 1
-    buyPrice: 10
-    description: "\uC2E0\uBC1C\uC740 \uBD80\uCE20"
+    sellPrice: 100
+    buyPrice: 200
+    description: "\uB2E4 \uB9C9\uC544\uB0B8\uB2E4(\uC5D0\uB514\uD130\uC5D0\uC11C
+      \uC218\uC815)"

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -417,6 +417,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 330053406431707626, guid: 5c74e354008a51044a220987c684bc6d, type: 3}
+      propertyPath: shopItems.Array.data[0].description
+      value: "\uB0B4 \uBAB8\uC740 \uAC80\uC73C\uB85C \uB418\uC5B4\uC788\uB2E4(\uC5D0\uB514\uD130\uC5D0\uC11C
+        \uC218\uC815)"
+      objectReference: {fileID: 0}
     - target: {fileID: 330053406431707627, guid: 5c74e354008a51044a220987c684bc6d, type: 3}
       propertyPath: m_Name
       value: Database
