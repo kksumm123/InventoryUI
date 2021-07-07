@@ -36,6 +36,7 @@ public class UserData : MonoBehaviour
 
     private void SaveGoldToCloud()
     {
+        FirestoreData.SaveToUserCloud("UserInfo", "Gold", Gold);
 
     }
 

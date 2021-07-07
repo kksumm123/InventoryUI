@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +17,16 @@ public class FirestoreData : MonoBehaviour
     {
         instance.firestoreManager.SaveToUserCloud(_collectionPath, null, data);
     }
+
+    internal static void SaveToUserCloud(string _collectionPath, string key, object value)
+    {
+        var saveData = new Dictionary<string, object>
+        {
+            [key] = value
+        };
+        SaveToUserCloud(_collectionPath, saveData);
+    }
+
 
     internal static void LoadFromUserCloud(string _collectionPath, Action<IDictionary<string, object>> ac = null)
     {
