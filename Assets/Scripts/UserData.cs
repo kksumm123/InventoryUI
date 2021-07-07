@@ -26,24 +26,41 @@ public class UserData : MonoBehaviour
     public int Gold
     {
         get { return gold; }
-        set { 
+        set
+        {
             gold = value;
             // 구글에 변경된 골드 저장
             SaveGoldToCloud();
             MoneyUI.instance?.RefreshUI();
         }
     }
-
     private void SaveGoldToCloud()
     {
         FirestoreData.SaveToUserCloud("UserInfo", "gold", Gold);
-
     }
 
+
     public int dia;
+    public int Dia
+    {
+        get { return dia; }
+        set
+        {
+            dia = value;
+            MoneyUI.instance?.RefreshUI();
+        }
+    }
     private void Awake()
     {
         instance = this;
+    }
+
+    IEnumerator Start()
+    {
+        //if (FirestoreManager.instance.userID != null)
+        // 스트링 비어있는지 안전하게 확인하는 법
+        while (string.IsNullOrEmpty(FirestoreManager.instance.userID))
+            yield return null;
 
         Load();
     }
@@ -53,26 +70,20 @@ public class UserData : MonoBehaviour
     }
     private void Load()
     {
-        //if (PlayerPrefs.HasKey("gold"))
-        //{
-        //    Gold = PlayerPrefs.GetInt("gold");
-        //    dia = PlayerPrefs.GetInt("dia");
+        FirestoreData.LoadFromUserCloud("UserInfo", LoadCallBack);
+    }
 
-        //    int itemCount = PlayerPrefs.GetInt("invenItems.Count", invenItems.Count);
-        //    for (int i = 0; i < itemCount; i++)
-        //    {
-        //        var loadItem = new InvenItemInfo();
-        //        loadItem.itemID = PlayerPrefs.GetInt("invenItems.itemID" + i);
-        //        loadItem.count = PlayerPrefs.GetInt("invenItems.count" + i);
-        //        loadItem.getDate = PlayerPrefs.GetString("invenItems.getDate" + i);
-        //        invenItems.Add(loadItem);
-        //    }
-        //}
-        //else
-        //{
-        //    Gold = 1100;
-        //    dia = 120;
-        //}
+    void LoadCallBack(IDictionary<string, object> obj)
+    {
+        if (obj.ContainsKey("Gold"))
+            Gold = Convert.ToInt32(obj["Gold"]);
+        else
+            Gold = 1100;
+
+        if (obj.ContainsKey("Dia"))
+            Dia = Convert.ToInt32(obj["Dia"]);
+        else
+            Dia = 110;
     }
 
     public static void SetGold(int gold)
