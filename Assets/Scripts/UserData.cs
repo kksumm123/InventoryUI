@@ -26,8 +26,19 @@ public class UserData : MonoBehaviour
     public int Gold
     {
         get { return gold; }
-        set { gold = value; }
+        set { 
+            gold = value;
+            // 구글에 변경된 골드 저장
+            SaveGoldToCloud();
+            MoneyUI.instance?.RefreshUI();
+        }
     }
+
+    private void SaveGoldToCloud()
+    {
+
+    }
+
     public int dia;
     private void Awake()
     {
