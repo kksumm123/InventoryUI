@@ -64,10 +64,6 @@ public class UserData : MonoBehaviour
 
         Load();
     }
-    private void OnDestroy()
-    {
-        Save();
-    }
     private void Load()
     {
         FirestoreData.LoadFromUserCloud("UserInfo", LoadCallBack);
@@ -88,26 +84,12 @@ public class UserData : MonoBehaviour
 
     public static void SetGold(int gold)
     {
-        //PlayerPrefs.SetInt("gold", gold);
-        //PlayerPrefs.Save();
-        //if(instance)
-        //{
-        //    instance.Gold = gold;
-        //    MoneyUI.instance.RefreshUI();
-        //}
-    }
-
-    private void Save()
-    {
-        //PlayerPrefs.SetInt("invenItems.Count", invenItems.Count);
-        //for (int i = 0; i < invenItems.Count; i++)
-        //{
-        //    var saveItem = invenItems[i];
-        //    PlayerPrefs.SetInt("invenItems.itemID" + i, saveItem.itemID);
-        //    PlayerPrefs.SetInt("invenItems.count" + i, saveItem.count);
-        //    PlayerPrefs.SetString("invenItems.getDate" + i, saveItem.getDate);
-        //}
-        //PlayerPrefs.SetInt("gold", Gold);
-        //PlayerPrefs.SetInt("dia", dia);
+        PlayerPrefs.SetInt("gold", gold);
+        PlayerPrefs.Save();
+        if (instance)
+        {
+            instance.Gold = gold;
+            MoneyUI.instance.RefreshUI();
+        }
     }
 }
