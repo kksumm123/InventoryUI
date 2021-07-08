@@ -26,13 +26,14 @@ public class UserData : MonoBehaviour
     {
         FirestoreManager.LoadFromUserCloud(userInfo, (DocumentSnapshot ds) =>
         {
-            if (ds.TryGetValue(myUserInfo, out userDataServer) == false)
-            {
-                print("서버에 MyUserInfo가 없다. 초기값을 설정하자.");
-                userDataServer.Gold = 1000;
-                userDataServer.Dia = 10;
-                userDataServer.InvenItems = new List<InvenItemServer>();
-            }
+            userDataServer = ds.GetValue<UserDataServer>("MyUserInfo");
+            //if (ds.TryGetValue(myUserInfo, out userDataServer) == false)
+            //{
+            //    print("서버에 MyUserInfo가 없다. 초기값을 설정하자.");
+            //    userDataServer.Gold = 1000;
+            //    userDataServer.Dia = 10;
+            //    userDataServer.InvenItems = new List<InvenItemServer>();
+            //}
             isLoadComplete = true;
             MoneyUI.instance.RefreshUI();
             InvenUI.instance.RefreshUI();
@@ -96,7 +97,7 @@ public class UserData : MonoBehaviour
         //};
         //cityRef.UpdateAsync(updates);
         CollectionReference citiesRef = FirebaseFirestore.DefaultInstance.Collection("cities");
-citiesRef.Document("SF").SetAsync(new Dictionary<string, object>(){
+        citiesRef.Document("SF").SetAsync(new Dictionary<string, object>(){
     { "Name", "San Francisco" },
     { "State", "CA" },
     { "Country", "USA" },
@@ -104,7 +105,7 @@ citiesRef.Document("SF").SetAsync(new Dictionary<string, object>(){
     { "Population", 860000 },
     { "Regions", new ArrayList{"west_coast", "norcal"} }
 });
-citiesRef.Document("LA").SetAsync(new Dictionary<string, object>(){
+        citiesRef.Document("LA").SetAsync(new Dictionary<string, object>(){
     { "Name", "Los Angeles" },
     { "State", "CA" },
     { "Country", "USA" },
@@ -112,7 +113,7 @@ citiesRef.Document("LA").SetAsync(new Dictionary<string, object>(){
     { "Population", 3900000 },
     { "Regions", new ArrayList{"west_coast", "socal"} }
 });
-citiesRef.Document("DC").SetAsync(new Dictionary<string, object>(){
+        citiesRef.Document("DC").SetAsync(new Dictionary<string, object>(){
     { "Name", "Washington D.C." },
     { "State", null },
     { "Country", "USA" },
@@ -120,7 +121,7 @@ citiesRef.Document("DC").SetAsync(new Dictionary<string, object>(){
     { "Population", 680000 },
     { "Regions", new ArrayList{"east_coast"} }
 });
-citiesRef.Document("TOK").SetAsync(new Dictionary<string, object>(){
+        citiesRef.Document("TOK").SetAsync(new Dictionary<string, object>(){
     { "Name", "Tokyo" },
     { "State", null },
     { "Country", "Japan" },
@@ -128,7 +129,7 @@ citiesRef.Document("TOK").SetAsync(new Dictionary<string, object>(){
     { "Population", 9000000 },
     { "Regions", new ArrayList{"kanto", "honshu"} }
 });
-citiesRef.Document("BJ").SetAsync(new Dictionary<string, object>(){
+        citiesRef.Document("BJ").SetAsync(new Dictionary<string, object>(){
     { "Name", "Beijing" },
     { "State", null },
     { "Country", "China" },
