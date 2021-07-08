@@ -32,7 +32,7 @@ public class UserData : MonoBehaviour
             isLoadComplete = true;
             MoneyUI.instance.RefreshUI();
             InvenUI.instance.RefreshUI();
-        }); 
+        });
     }
     [ContextMenu("Save UserData")]
     void Save()
@@ -61,11 +61,12 @@ public class UserData : MonoBehaviour
         FirestoreManager.SaveToUserServer(userInfo, (myUserInfo, userDataServer));
     }
 
-    internal void ItemBuy(int buyPrice, InvenItemServer newItem)
+    internal void BuyItem(int buyPrice, InvenItemServer newItem)
     {
         userDataServer.Gold -= buyPrice;
         userDataServer.InvenItems.Add(newItem);
         //서버에서 추가하자
+        //FirestoreManager.SaveToUserServer(userInfo, )
     }
 
     internal void SellItem(int sellPrice, InvenItemServer invenItemInfo)
@@ -74,13 +75,26 @@ public class UserData : MonoBehaviour
         userDataServer.InvenItems.Remove(invenItemInfo);
         //서버에서 삭제하자
     }
-
     [ContextMenu("저장, 변수 2개")]
     void Save2Variables()
     {
         FirestoreManager.SaveToUserServer(userInfo, ("Key1", "Value1"), ("Key2", 2));
     }
+    [ContextMenu("삭제테스트")]
+    void DeleteTemp()
+    {
+        DocumentReference cityRef = FirebaseFirestore.DefaultInstance.Document($"{userInfo}/" + FirestoreManager.instance.userID);
+
+        // Remove the 'Key1' field from the document
+        Dictionary<string, object> updates = new Dictionary<string, object>
+        {
+            { "Key1", FieldValue.Delete }
+        };
+        cityRef.UpdateAsync(updates);
+    }
+
 }
+
 [System.Serializable]
 [FirestoreData]
 public sealed class UserDataServer
@@ -91,12 +105,23 @@ public sealed class UserDataServer
     [SerializeField] int iD;
     [SerializeField] List<InvenItemServer> invenItems;
 
-    [FirestoreProperty] public int Gold { get => gold; set => gold = value; }
-    [FirestoreProperty] public int Dia { get => dia; set => dia = value; }
+    [FirestoreProperty]
+    public int Gold
+    {
+        get => gold;
+        set { gold = value; MoneyUI.instance.RefreshUI(); }
+    }
+    [FirestoreProperty]
+    public int Dia
+    {
+        get => dia;
+        set { dia = value; MoneyUI.instance.RefreshUI(); }
+    }
     [FirestoreProperty] public string Name { get => name; set => name = value; }
     [FirestoreProperty] public int ID { get => iD; set => iD = value; }
     [FirestoreProperty] public List<InvenItemServer> InvenItems { get => invenItems; set => invenItems = value; }
 }
+
 [System.Serializable]
 [FirestoreData]
 public sealed class InvenItemServer

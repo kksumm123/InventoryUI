@@ -46,7 +46,7 @@ public class ItemInfoUI : MonoBehaviour
         newItem.Count = 1;
         newItem.GetDate = DateTime.Now;
 
-        UserData.instance.ItemBuy(shopItemInfo.buyPrice, newItem);
+        UserData.instance.BuyItem(shopItemInfo.buyPrice, newItem);
         InvenUI.instance.RefreshUI();
         MoneyUI.instance.RefreshUI();
     }
