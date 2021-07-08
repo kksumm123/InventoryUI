@@ -261,8 +261,9 @@ public class FirestoreManager : MonoBehaviour
         print($"{userID}를 로그아웃 합니다");
 
         auth.SignOut();
-        PlayerPrefs.DeleteKey(AsyncID);
-        PlayerPrefs.Save();
+        // 로그아웃 하고 익명로그인 다시 안하도록 주석처리
+        //PlayerPrefs.DeleteKey(AsyncID);
+        //PlayerPrefs.Save();
     }
 
     protected bool LogTaskCompletion(Task task, string operation)
