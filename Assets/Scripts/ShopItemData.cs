@@ -85,6 +85,14 @@ public class ShopItemData : MonoBehaviour
                 InitFromGoogleData();
             }
         }, true);
+        foreach (var item in MyGame.Data.DataList)
+        {
+            Debug.Log(item);
+        }
+        foreach (var item in MyGame.Data.DataMap)
+        {
+            Debug.Log($"{item.Key} : {item.Value}");
+        }
     }
     [ContextMenu("Save To Google Sheet On FirstItem", false, -10000)]
     void SaveToGoogleSheet()

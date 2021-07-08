@@ -34,12 +34,6 @@ public class UserData : MonoBehaviour
             MoneyUI.instance?.RefreshUI();
         }
     }
-    private void SaveGoldToCloud()
-    {
-        FirestoreData.SaveToUserCloud("UserInfo", "gold", Gold);
-    }
-
-
     public int dia;
     public int Dia
     {
@@ -53,33 +47,6 @@ public class UserData : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-
-    IEnumerator Start()
-    {
-        //if (FirestoreManager.instance.userID != null)
-        // 스트링 비어있는지 안전하게 확인하는 법
-        while (string.IsNullOrEmpty(FirestoreManager.instance.userID))
-            yield return null;
-
-        Load();
-    }
-    private void Load()
-    {
-        FirestoreData.LoadFromUserCloud("UserInfo", LoadCallBack);
-    }
-
-    void LoadCallBack(IDictionary<string, object> obj)
-    {
-        if (obj.ContainsKey("Gold"))
-            Gold = Convert.ToInt32(obj["Gold"]);
-        else
-            Gold = 1100;
-
-        if (obj.ContainsKey("Dia"))
-            Dia = Convert.ToInt32(obj["Dia"]);
-        else
-            Dia = 110;
     }
 
     public static void SetGold(int gold)
