@@ -58,18 +58,27 @@ public class UserData : MonoBehaviour
         userDataServer.InvenItems.Add(new InvenItemServer()
         {
             ID = 1,
-            UID = 2,
+            UID = 1,
             Count = 1,
+            GetData = DateTime.Now.AddDays(-7)
         });
         userDataServer.InvenItems.Add(new InvenItemServer()
         {
             ID = 1,
             UID = 2,
             Count = 4,
+            GetData = DateTime.Now.AddDays(-7)
         });
-        Dictionary<string, object> dic = new Dictionary<string, object>();
-        dic["MyUserInfo"] = userDataServer;
-        FirestoreData.SaveToUserCloud("UserInfo", dic);
+        //Dictionary<string, object> dic = new Dictionary<string, object>();
+        //dic["MyUserInfo"] = userDataServer;
+        //FirestoreData.SaveToUserCloud("UserInfo", dic);
+        FirestoreManager.SaveToUserServer("UserInfo", ("MyUserInfo", userDataServer));
+    }
+
+    [ContextMenu("저장, 변수 2개")]
+    void Save2Variables()
+    {
+        FirestoreManager.SaveToUserServer("UserInfo", ("Key1", "Value1"), ("Key2", 2));
     }
     public static void SetGold(int gold)
     {
@@ -98,6 +107,7 @@ public sealed class UserDataServer
     [FirestoreProperty] public int ID { get => iD; set => iD = value; }
     [FirestoreProperty] public List<InvenItemServer> InvenItems { get => invenItems; set => invenItems = value; }
 }
+[System.Serializable]
 [FirestoreData]
 public sealed class InvenItemServer
 {
