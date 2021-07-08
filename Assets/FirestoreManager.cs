@@ -78,8 +78,8 @@ public class FirestoreManager : MonoBehaviour
         Dictionary<string, object> dic = new Dictionary<string, object>();
         foreach (var item in data)
             dic[item.Item1] = item.Item2;
-
-        SaveToCloud(collectionName, dic);
+        string docPath = collectionName + "/" + userID;
+        SaveToCloud(docPath, dic);
     }
 
     const string AsyncID = "AsyncID";
