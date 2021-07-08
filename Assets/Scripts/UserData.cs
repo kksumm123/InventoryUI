@@ -48,6 +48,11 @@ public class UserData : MonoBehaviour
         instance = this;
     }
     public UserDataServer userDataServer;
+    [ContextMenu("로그아웃(임시)")]
+    void SignOut()
+    {
+        FirestoreManager.instance.SignOut();
+    }
     [ContextMenu("Save UserData")]
     void Save()
     {
@@ -60,14 +65,14 @@ public class UserData : MonoBehaviour
             ID = 1,
             UID = 1,
             Count = 1,
-            GetData = DateTime.Now.AddDays(-7)
+            GetData = DateTime.Now.AddDays(0)
         });
         userDataServer.InvenItems.Add(new InvenItemServer()
         {
             ID = 1,
             UID = 2,
             Count = 4,
-            GetData = DateTime.Now.AddDays(-7)
+            GetData = DateTime.Now.AddDays(0)
         });
         //Dictionary<string, object> dic = new Dictionary<string, object>();
         //dic["MyUserInfo"] = userDataServer;
