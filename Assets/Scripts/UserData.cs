@@ -70,7 +70,7 @@ public class UserData : MonoBehaviour
         userDataServer.Gold -= buyPrice;
         userDataServer.InvenItems.Add(newItem);
         //서버에서 추가하자
-        //FirestoreManager.SaveToUserServer(userInfo, )
+        FirestoreManager.SaveToUserServer(userInfo, (myUserInfo, userDataServer));
     }
 
     internal void SellItem(int sellPrice, InvenItemServer invenItemInfo)
