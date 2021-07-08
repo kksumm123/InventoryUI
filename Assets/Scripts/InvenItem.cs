@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InvenItem : MonoBehaviour, IPointerClickHandler
 {
-    InvenItemInfo invenItemInfo;
+    InvenItemServer invenItemInfo;
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -27,7 +27,7 @@ public class InvenItem : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    internal void Init(InvenItemInfo item)
+    internal void Init(InvenItemServer item)
     {
         invenItemInfo = item;
 
@@ -35,7 +35,7 @@ public class InvenItem : MonoBehaviour, IPointerClickHandler
         //item.count
         ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
         GetComponent<Image>().sprite = shopItemInfo.Icon;
-        transform.Find("CountText").GetComponent<Text>().text = item.count.ToString();
+        transform.Find("CountText").GetComponent<Text>().text = item.Count.ToString();
 
 
     }

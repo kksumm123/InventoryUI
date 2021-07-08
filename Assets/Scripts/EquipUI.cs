@@ -13,7 +13,7 @@ public class EquipUI : MonoBehaviour
     {
         instance = this;
     }
-    public void SetEquipItem(InvenItemInfo invenItemInfo)
+    public void SetEquipItem(InvenItemServer invenItemInfo)
     {
         ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
         switch (shopItemInfo.type)

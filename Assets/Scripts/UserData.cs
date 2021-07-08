@@ -4,24 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class InvenItemInfo
-{
-    public int itemID;
-    public int count;
-    public string getDate; //획득한 날짜
-
-    public ShopItemInfo GetShopItemInfo()
-    {
-        return ShopItemData.instance.shopItems.Find(x => x.itemID == itemID);
-    }
-}
-
 public class UserData : MonoBehaviour
 {
     public static UserData instance;
 
-    public List<InvenItemInfo> invenItems;
+    public List<InvenItemServer> invenItems;
 
     int gold;
     public int Gold
@@ -61,19 +48,24 @@ public class UserData : MonoBehaviour
             ID = 1,
             UID = 1,
             Count = 1,
-            GetData = DateTime.Now.AddDays(0)
+            GetDate = DateTime.Now.AddDays(0)
         });
         userDataServer.InvenItems.Add(new InvenItemServer()
         {
             ID = 1,
             UID = 2,
             Count = 4,
-            GetData = DateTime.Now.AddDays(0)
+            GetDate = DateTime.Now.AddDays(0)
         });
         //Dictionary<string, object> dic = new Dictionary<string, object>();
         //dic["MyUserInfo"] = userDataServer;
         //FirestoreData.SaveToUserCloud("UserInfo", dic);
         FirestoreManager.SaveToUserServer("UserInfo", ("MyUserInfo", userDataServer));
+    }
+
+    internal void SellItem(int sellPrice, InvenItemServer invenItemInfo)
+    {
+
     }
 
     [ContextMenu("저장, 변수 2개")]
@@ -116,13 +108,13 @@ public sealed class InvenItemServer
     [SerializeField] int iD;
     [SerializeField] int count;
     [SerializeField] int enchant;
-    [SerializeField] string getData;
+    [SerializeField] string getDate;
 
     [FirestoreProperty] public int UID { get => uID; set => uID = value; }
     [FirestoreProperty] public int ID { get => iD; set => iD = value; }
     [FirestoreProperty] public int Count { get => count; set => count = value; }
     [FirestoreProperty] public int Enchant { get => enchant; set => enchant = value; }
-    [FirestoreProperty] public DateTime GetData { get => DateTime.Parse(getData); set => getData = value.ToString(); }
+    [FirestoreProperty] public DateTime GetDate { get => DateTime.Parse(getDate); set => getDate = value.ToString(); }
 
     public override bool Equals(object obj)
     {
@@ -136,5 +128,10 @@ public sealed class InvenItemServer
     public override int GetHashCode()
     {
         return UID;
+    }
+
+    public ShopItemInfo GetShopItemInfo()
+    {
+        return ShopItemData.instance.shopItems.Find(x => x.itemID == ID);
     }
 }

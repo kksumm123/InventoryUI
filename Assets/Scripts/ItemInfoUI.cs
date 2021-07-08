@@ -8,7 +8,7 @@ public class ItemInfoUI : MonoBehaviour
 {
     public static ItemInfoUI instance;
     public ShopItemInfo shopItemInfo;
-    public InvenItemInfo invenItemInfo;
+    public InvenItemServer invenItemInfo;
     private void Awake()
     {
         instance = this;
@@ -42,10 +42,10 @@ public class ItemInfoUI : MonoBehaviour
         print("ItemBuy");
 
         UserData.instance.Gold -= shopItemInfo.buyPrice;
-        var newItem = new InvenItemInfo();
-        newItem.itemID = shopItemInfo.itemID;
-        newItem.count = 1;
-        newItem.getDate = DateTime.Now.ToString();
+        var newItem = new InvenItemServer();
+        newItem.ID = shopItemInfo.itemID;
+        newItem.Count = 1;
+        newItem.GetDate = DateTime.Now;
         UserData.instance.invenItems.Add(newItem);
         InvenUI.instance.RefreshUI();
         MoneyUI.instance.RefreshUI();
@@ -54,8 +54,7 @@ public class ItemInfoUI : MonoBehaviour
     {
         print("ItemSell");
 
-        UserData.instance.Gold += shopItemInfo.sellPrice;
-        //UserData.instance.invenItems.Remove();
+        UserData.instance.SellItem(shopItemInfo.sellPrice, invenItemInfo);
         UserData.instance.invenItems.Remove(invenItemInfo);
         InvenUI.instance.RefreshUI();
         MoneyUI.instance.RefreshUI();
@@ -69,7 +68,7 @@ public class ItemInfoUI : MonoBehaviour
 
         SetItemInfo(shopItemInfo);
     }
-    internal void ShowInvenItem(InvenItemInfo invenItemInfo)
+    internal void ShowInvenItem(InvenItemServer invenItemInfo)
     {
         this.invenItemInfo = invenItemInfo;
         invenBtn.SetActive(true);

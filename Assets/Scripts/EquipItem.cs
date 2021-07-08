@@ -18,7 +18,7 @@ public class EquipItem : MonoBehaviour
         
     }
 
-    internal void SetItem(InvenItemInfo invenItemInfo)
+    internal void SetItem(InvenItemServer invenItemInfo)
     {
         ShopItemInfo shopItemInfo = invenItemInfo.GetShopItemInfo();
 
