@@ -1,4 +1,5 @@
-﻿using Firebase.Firestore;
+﻿using Firebase.Extensions;
+using Firebase.Firestore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ public class UserData : MonoBehaviour
     }
     public UserDataServer userDataServer;
     public bool isLoadComplete = false;
+
+    public FirebaseFirestore db { get => FirebaseFirestore.DefaultInstance; }
+
     private void Start()
     {
         FirestoreManager.LoadFromUserCloud(userInfo, (DocumentSnapshot ds) =>
@@ -83,16 +87,69 @@ public class UserData : MonoBehaviour
     [ContextMenu("삭제테스트")]
     void DeleteTemp()
     {
-        DocumentReference cityRef = FirebaseFirestore.DefaultInstance.Document($"{userInfo}/" + FirestoreManager.instance.userID);
+        //DocumentReference cityRef = FirebaseFirestore.DefaultInstance.Document($"{userInfo}/" + FirestoreManager.instance.userID);
 
-        // Remove the 'Key1' field from the document
-        Dictionary<string, object> updates = new Dictionary<string, object>
-        {
-            { "Key1", FieldValue.Delete }
-        };
-        cityRef.UpdateAsync(updates);
+        //// Remove the 'Key1' field from the document
+        //Dictionary<string, object> updates = new Dictionary<string, object>
+        //{
+        //    { "Key1", FieldValue.Delete }
+        //};
+        //cityRef.UpdateAsync(updates);
+        CollectionReference citiesRef = FirebaseFirestore.DefaultInstance.Collection("cities");
+citiesRef.Document("SF").SetAsync(new Dictionary<string, object>(){
+    { "Name", "San Francisco" },
+    { "State", "CA" },
+    { "Country", "USA" },
+    { "Capital", false },
+    { "Population", 860000 },
+    { "Regions", new ArrayList{"west_coast", "norcal"} }
+});
+citiesRef.Document("LA").SetAsync(new Dictionary<string, object>(){
+    { "Name", "Los Angeles" },
+    { "State", "CA" },
+    { "Country", "USA" },
+    { "Capital", false },
+    { "Population", 3900000 },
+    { "Regions", new ArrayList{"west_coast", "socal"} }
+});
+citiesRef.Document("DC").SetAsync(new Dictionary<string, object>(){
+    { "Name", "Washington D.C." },
+    { "State", null },
+    { "Country", "USA" },
+    { "Capital", true },
+    { "Population", 680000 },
+    { "Regions", new ArrayList{"east_coast"} }
+});
+citiesRef.Document("TOK").SetAsync(new Dictionary<string, object>(){
+    { "Name", "Tokyo" },
+    { "State", null },
+    { "Country", "Japan" },
+    { "Capital", true },
+    { "Population", 9000000 },
+    { "Regions", new ArrayList{"kanto", "honshu"} }
+});
+citiesRef.Document("BJ").SetAsync(new Dictionary<string, object>(){
+    { "Name", "Beijing" },
+    { "State", null },
+    { "Country", "China" },
+    { "Capital", true },
+    { "Population", 21500000 },
+    { "Regions", new ArrayList{"jingjinji", "hebei"} }
+});
     }
-
+    [ContextMenu("CA인 모든 도시를 반환")]
+    void Test1()
+    {
+        CollectionReference citiesRef = db.Collection("cities");
+        Query query = citiesRef.WhereEqualTo("State", "CA");
+        query.GetSnapshotAsync().ContinueWithOnMainThread((querySnapshotTask) =>
+        {
+            foreach (DocumentSnapshot documentSnapshot in querySnapshotTask.Result.Documents)
+            {
+                Debug.Log(String.Format("Document {0} returned by query State=CA", documentSnapshot.Id));
+            }
+        });
+    }
 }
 
 [System.Serializable]

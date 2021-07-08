@@ -48,7 +48,6 @@ public class ItemInfoUI : MonoBehaviour
 
         UserData.instance.BuyItem(shopItemInfo.buyPrice, newItem);
         InvenUI.instance.RefreshUI();
-        MoneyUI.instance.RefreshUI();
     }
     void ItemSell()
     {
@@ -56,7 +55,6 @@ public class ItemInfoUI : MonoBehaviour
 
         UserData.instance.SellItem(shopItemInfo.sellPrice, invenItemInfo);
         InvenUI.instance.RefreshUI();
-        MoneyUI.instance.RefreshUI();
     }
 
 
