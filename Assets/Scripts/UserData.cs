@@ -48,11 +48,7 @@ public class UserData : MonoBehaviour
         instance = this;
     }
     public UserDataServer userDataServer;
-    [ContextMenu("로그아웃(임시)")]
-    void SignOut()
-    {
-        FirestoreManager.instance.SignOut();
-    }
+
     [ContextMenu("Save UserData")]
     void Save()
     {
