@@ -105,13 +105,13 @@ public sealed class InvenItemServer
     [SerializeField] int iD;
     [SerializeField] int count;
     [SerializeField] int enchant;
-    [SerializeField] DateTime getData;
+    [SerializeField] string getData;
 
     [FirestoreProperty] public int UID { get => uID; set => uID = value; }
     [FirestoreProperty] public int ID { get => iD; set => iD = value; }
     [FirestoreProperty] public int Count { get => count; set => count = value; }
     [FirestoreProperty] public int Enchant { get => enchant; set => enchant = value; }
-    [FirestoreProperty] public DateTime GetData { get => getData; set => getData = value; }
+    [FirestoreProperty] public DateTime GetData { get => DateTime.Parse(getData); set => getData = value.ToString(); }
 
     public override bool Equals(object obj)
     {
