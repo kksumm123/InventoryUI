@@ -41,12 +41,12 @@ public class ItemInfoUI : MonoBehaviour
     {
         print("ItemBuy");
 
-        UserData.instance.Gold -= shopItemInfo.buyPrice;
         var newItem = new InvenItemServer();
         newItem.ID = shopItemInfo.itemID;
         newItem.Count = 1;
         newItem.GetDate = DateTime.Now;
-        UserData.instance.invenItems.Add(newItem);
+
+        UserData.instance.ItemBuy(shopItemInfo.buyPrice, newItem);
         InvenUI.instance.RefreshUI();
         MoneyUI.instance.RefreshUI();
     }
@@ -55,7 +55,6 @@ public class ItemInfoUI : MonoBehaviour
         print("ItemSell");
 
         UserData.instance.SellItem(shopItemInfo.sellPrice, invenItemInfo);
-        UserData.instance.invenItems.Remove(invenItemInfo);
         InvenUI.instance.RefreshUI();
         MoneyUI.instance.RefreshUI();
     }

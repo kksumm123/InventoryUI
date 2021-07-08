@@ -63,9 +63,18 @@ public class UserData : MonoBehaviour
         FirestoreManager.SaveToUserServer("UserInfo", ("MyUserInfo", userDataServer));
     }
 
+    internal void ItemBuy(int buyPrice, InvenItemServer newItem)
+    {
+        userDataServer.Gold -= buyPrice;
+        userDataServer.InvenItems.Add(newItem);
+        //서버에서 추가하자
+    }
+
     internal void SellItem(int sellPrice, InvenItemServer invenItemInfo)
     {
-
+        userDataServer.Gold += sellPrice;
+        userDataServer.InvenItems.Remove(invenItemInfo);
+        //서버에서 삭제하자
     }
 
     [ContextMenu("저장, 변수 2개")]
