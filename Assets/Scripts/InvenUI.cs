@@ -10,10 +10,6 @@ public class InvenUI : MonoBehaviour
         instance = this;
     }
     [SerializeField] InvenItem itemBase;
-    void Start()
-    {
-        RefreshUI();
-    }
 
     List<GameObject> childItem = new List<GameObject>();
     public void RefreshUI()
@@ -21,7 +17,7 @@ public class InvenUI : MonoBehaviour
         childItem.ForEach(x => Destroy(x));
         childItem.Clear();
         itemBase.gameObject.SetActive(true);
-        foreach (var item in UserData.instance.invenItems)
+        foreach (var item in UserData.instance.userDataServer.InvenItems)
         {
             var newItem =
                 Instantiate(itemBase, itemBase.transform.parent);

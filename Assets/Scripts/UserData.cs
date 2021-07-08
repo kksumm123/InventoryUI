@@ -7,30 +7,11 @@ using UnityEngine;
 public class UserData : MonoBehaviour
 {
     const string userInfo = "UserInfo";
+    const string myUserInfo = "MyUserInfo";
     public static UserData instance;
-    
+
     public List<InvenItemServer> invenItems;
 
-    int gold;
-    public int Gold
-    {
-        get { return gold; }
-        set
-        {
-            gold = value;
-            MoneyUI.instance?.RefreshUI();
-        }
-    }
-    int dia;
-    public int Dia
-    {
-        get { return dia; }
-        set
-        {
-            dia = value;
-            MoneyUI.instance?.RefreshUI();
-        }
-    }
     private void Awake()
     {
         instance = this;
@@ -41,15 +22,17 @@ public class UserData : MonoBehaviour
     {
         FirestoreManager.LoadFromUserCloud(userInfo, (DocumentSnapshot ds) =>
         {
-            if(ds.TryGetValue("MyUserData", out userDataServer))
+            if (ds.TryGetValue(myUserInfo, out userDataServer) == false)
             {
-                print("서버에 MyUserData가 없다. 초기값을 설정하자.");
+                print("서버에 MyUserInfo가 없다. 초기값을 설정하자.");
                 userDataServer.Gold = 1000;
                 userDataServer.Dia = 10;
                 userDataServer.InvenItems = new List<InvenItemServer>();
             }
             isLoadComplete = true;
-        });
+            MoneyUI.instance.RefreshUI();
+            InvenUI.instance.RefreshUI();
+        }); 
     }
     [ContextMenu("Save UserData")]
     void Save()
@@ -75,7 +58,7 @@ public class UserData : MonoBehaviour
         //Dictionary<string, object> dic = new Dictionary<string, object>();
         //dic["MyUserInfo"] = userDataServer;
         //FirestoreData.SaveToUserCloud("UserInfo", dic);
-        FirestoreManager.SaveToUserServer(userInfo, ("MyUserInfo", userDataServer));
+        FirestoreManager.SaveToUserServer(userInfo, (myUserInfo, userDataServer));
     }
 
     internal void ItemBuy(int buyPrice, InvenItemServer newItem)
@@ -96,16 +79,6 @@ public class UserData : MonoBehaviour
     void Save2Variables()
     {
         FirestoreManager.SaveToUserServer(userInfo, ("Key1", "Value1"), ("Key2", 2));
-    }
-    public static void SetGold(int gold)
-    {
-        PlayerPrefs.SetInt("gold", gold);
-        PlayerPrefs.Save();
-        if (instance)
-        {
-            instance.Gold = gold;
-            MoneyUI.instance.RefreshUI();
-        }
     }
 }
 [System.Serializable]
