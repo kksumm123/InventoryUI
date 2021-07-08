@@ -34,7 +34,48 @@ public class FirestoreManager : MonoBehaviour
         CheckAndFixDependencThenInitializeFirebase();
     }
 
+    internal static Task LoadFromUserCloud(string collectionPath, string subPath, Action<DocumentSnapshot> p)
+    {
+        return instance._LoadFromUserCloud(collectionPath, p, subPath);
+    }
 
+    internal static Task LoadFromUserCloud(string collectionPath, Action<DocumentSnapshot> p)
+    {
+        return instance._LoadFromUserCloud(collectionPath, p);
+    }
+
+    internal static Task GetUserSnapshot(string collectionPath, string subPath, Action<DocumentSnapshot> p)
+    {
+        return instance._LoadFromUserCloud(collectionPath, p, subPath);
+    }
+
+
+    async Task _LoadFromUserCloud(string collectionPath, Action<DocumentSnapshot> p, string subPath = null)
+    {
+        if (string.IsNullOrEmpty(userID))
+        {
+            await Task.Run(() =>
+            {
+                while (true)
+                {
+                    Task.Delay(1000 / 60);
+                    if (string.IsNullOrEmpty(userID) == false)
+                        break;
+                }
+            });
+        }
+
+        string docPath = $"{collectionPath}/{userID}";
+        if (string.IsNullOrEmpty(subPath) == false)
+            docPath = $"{docPath}/{subPath}";
+
+        await db.Document(docPath)
+            .GetSnapshotAsync()
+            .ContinueWithOnMainThread(ss =>
+            {
+                p(ss.Result);
+            });
+    }
     public void LoadFromCloud(string docFullPath, Action<IDictionary<string, object>> ac)
     {
         StartCoroutine(ReadDoc(db.Document(docFullPath), ac));
@@ -45,7 +86,12 @@ public class FirestoreManager : MonoBehaviour
         StartCoroutine(WriteDoc(db.Document(docFullPath), data));
     }
 
-    public void LoadFromUserCloud(string _collectionPath, string subDocPath = null, Action<IDictionary<string, object>> ac = null)
+    public static void LoadFromUserCloud(string _collectionPath, string subDocPath = null, Action<IDictionary<string, object>> ac = null)
+    {
+        instance._LoadFromUserCloud(_collectionPath, subDocPath, ac);
+    }
+
+    void _LoadFromUserCloud(string _collectionPath, string subDocPath, Action<IDictionary<string, object>> ac)
     {
         if (IsExistLoginID() == false)
             return;
@@ -55,7 +101,6 @@ public class FirestoreManager : MonoBehaviour
             docPath += $"/{subDocPath}";
         LoadFromCloud(docPath, ac);
     }
-
 
     public void SaveToUserCloud(string _collectionPath, string subDocPath = null, Dictionary<string, object> data = null)
     {

@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class UserData : MonoBehaviour
 {
+    const string userInfo = "UserInfo";
     public static UserData instance;
-
+    
     public List<InvenItemServer> invenItems;
 
     int gold;
@@ -35,7 +36,21 @@ public class UserData : MonoBehaviour
         instance = this;
     }
     public UserDataServer userDataServer;
-
+    public bool isLoadComplete = false;
+    private void Start()
+    {
+        FirestoreManager.LoadFromUserCloud(userInfo, (DocumentSnapshot ds) =>
+        {
+            if(ds.TryGetValue("MyUserData", out userDataServer))
+            {
+                print("서버에 MyUserData가 없다. 초기값을 설정하자.");
+                userDataServer.Gold = 1000;
+                userDataServer.Dia = 10;
+                userDataServer.InvenItems = new List<InvenItemServer>();
+            }
+            isLoadComplete = true;
+        });
+    }
     [ContextMenu("Save UserData")]
     void Save()
     {
@@ -60,7 +75,7 @@ public class UserData : MonoBehaviour
         //Dictionary<string, object> dic = new Dictionary<string, object>();
         //dic["MyUserInfo"] = userDataServer;
         //FirestoreData.SaveToUserCloud("UserInfo", dic);
-        FirestoreManager.SaveToUserServer("UserInfo", ("MyUserInfo", userDataServer));
+        FirestoreManager.SaveToUserServer(userInfo, ("MyUserInfo", userDataServer));
     }
 
     internal void ItemBuy(int buyPrice, InvenItemServer newItem)
@@ -80,7 +95,7 @@ public class UserData : MonoBehaviour
     [ContextMenu("저장, 변수 2개")]
     void Save2Variables()
     {
-        FirestoreManager.SaveToUserServer("UserInfo", ("Key1", "Value1"), ("Key2", 2));
+        FirestoreManager.SaveToUserServer(userInfo, ("Key1", "Value1"), ("Key2", 2));
     }
     public static void SetGold(int gold)
     {
