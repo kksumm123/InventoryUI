@@ -33,7 +33,7 @@ public class UserData : MonoBehaviour
             MoneyUI.instance?.RefreshUI();
         }
     }
-    public int dia;
+    int dia;
     public int Dia
     {
         get { return dia; }
@@ -82,23 +82,36 @@ public class UserData : MonoBehaviour
         }
     }
 }
+[System.Serializable]
 [FirestoreData]
 public sealed class UserDataServer
 {
-    [FirestoreProperty] public int Gold { get; set; }
-    [FirestoreProperty] public int Dia { get; set; }
-    [FirestoreProperty] public int Name { get; set; }
-    [FirestoreProperty] public int ID { get; set; }
-    public List<InvenItemServer> InvenItems { get; set; }
+    [SerializeField] int gold;
+    [SerializeField] int dia;
+    [SerializeField] string name;
+    [SerializeField] int iD;
+    [SerializeField] List<InvenItemServer> invenItems;
+
+    [FirestoreProperty] public int Gold { get => gold; set => gold = value; }
+    [FirestoreProperty] public int Dia { get => dia; set => dia = value; }
+    [FirestoreProperty] public string Name { get => name; set => name = value; }
+    [FirestoreProperty] public int ID { get => iD; set => iD = value; }
+    [FirestoreProperty] public List<InvenItemServer> InvenItems { get => invenItems; set => invenItems = value; }
 }
 [FirestoreData]
 public sealed class InvenItemServer
 {
-    [FirestoreProperty] public int UID { get; set; }
-    [FirestoreProperty] public int ID { get; set; }
-    [FirestoreProperty] public int Count { get; set; }
-    [FirestoreProperty] public int Enchant { get; set; }
-    [FirestoreProperty] public DateTime GetData { get; set; }
+    [SerializeField] int uID;
+    [SerializeField] int iD;
+    [SerializeField] int count;
+    [SerializeField] int enchant;
+    [SerializeField] DateTime getData;
+
+    [FirestoreProperty] public int UID { get => uID; set => uID = value; }
+    [FirestoreProperty] public int ID { get => iD; set => iD = value; }
+    [FirestoreProperty] public int Count { get => count; set => count = value; }
+    [FirestoreProperty] public int Enchant { get => enchant; set => enchant = value; }
+    [FirestoreProperty] public DateTime GetData { get => getData; set => getData = value; }
 
     public override bool Equals(object obj)
     {
