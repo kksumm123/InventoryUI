@@ -73,8 +73,29 @@ public class FirestoreManager : MonoBehaviour
             .GetSnapshotAsync()
             .ContinueWithOnMainThread(ss =>
             {
-                p(ss.Result);
+                mainThreadFn.Add(() =>
+                {
+                    p(ss.Result);
+                });
             });
+    }
+
+    List<Action> mainThreadFn = new List<Action>();
+    private void Update()
+    {
+        try
+        {
+            foreach (var item in mainThreadFn)
+                item();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+        finally
+        {
+            mainThreadFn.Clear();
+        }
     }
     public void LoadFromCloud(string docFullPath, Action<IDictionary<string, object>> ac)
     {

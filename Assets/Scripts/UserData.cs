@@ -26,14 +26,22 @@ public class UserData : MonoBehaviour
     {
         FirestoreManager.LoadFromUserCloud(userInfo, (DocumentSnapshot ds) =>
         {
-            userDataServer = ds.GetValue<UserDataServer>("MyUserInfo");
-            //if (ds.TryGetValue(myUserInfo, out userDataServer) == false)
-            //{
-            //    print("서버에 MyUserInfo가 없다. 초기값을 설정하자.");
-            //    userDataServer.Gold = 1000;
-            //    userDataServer.Dia = 10;
-            //    userDataServer.InvenItems = new List<InvenItemServer>();
-            //}
+            //userDataServer = ds.GetValue<UserDataServer>("MyUserInfo");
+
+            if (ds.TryGetValue(myUserInfo, out userDataServer) == false)
+            {
+                print("서버에 MyUserInfo가 없다. 초기값을 설정하자.");
+                userDataServer.Gold = 1000;
+                userDataServer.Dia = 10;
+                userDataServer.InvenItems = new List<InvenItemServer>();
+            }
+            else
+            {
+                foreach (var item in userDataServer.InvenItems)
+                {
+                    item.GetDate = item.GetDate.AddHours(9);
+                }
+            }
             isLoadComplete = true;
             MoneyUI.instance.RefreshUI();
             InvenUI.instance.RefreshUI();
@@ -167,13 +175,23 @@ public sealed class UserDataServer
     public int Gold
     {
         get => gold;
-        set { gold = value; MoneyUI.instance.RefreshUI(); }
+        set
+        {
+            gold = value;
+            if (MoneyUI.instance != null)
+                MoneyUI.instance.RefreshUI();
+        }
     }
     [FirestoreProperty]
     public int Dia
     {
         get => dia;
-        set { dia = value; MoneyUI.instance.RefreshUI(); }
+        set
+        {
+            dia = value;
+            if (MoneyUI.instance != null)
+                MoneyUI.instance.RefreshUI();
+        }
     }
     [FirestoreProperty] public string Name { get => name; set => name = value; }
     [FirestoreProperty] public int ID { get => iD; set => iD = value; }
